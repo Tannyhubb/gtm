@@ -41,6 +41,9 @@ export const metadata: Metadata = {
       "We architect go-to-market strategies that turn ambitious products into market leaders.",
     type: "website",
   },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
