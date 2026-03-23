@@ -79,7 +79,9 @@ export default function Pricing() {
 
               <MagneticButton
                 as="a"
-                href="#contact"
+                href="https://calendly.com/tanmaybhardwaj4444/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`w-full justify-center text-sm font-medium tracking-wide flex items-center gap-2 uppercase py-4 transition-colors duration-300 ${
                   plan.highlight
                     ? "bg-accent text-bg hover:bg-fg"

@@ -86,7 +86,9 @@ export default function Hero() {
         >
           <MagneticButton
             as="a"
-            href="#contact"
+            href="https://calendly.com/tanmaybhardwaj4444/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-accent text-bg text-sm font-medium px-8 py-4 tracking-wide uppercase hover:bg-fg transition-colors duration-300 hover-target shadow-[0_0_30px_rgba(232,160,69,0.2)] hover:shadow-[0_0_40px_rgba(245,244,240,0.3)]"
           >
             Book a Call

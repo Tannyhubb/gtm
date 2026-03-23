@@ -64,7 +64,9 @@ export default function Navbar() {
               ))}
               <MagneticButton
                 as="a"
-                href="#contact"
+                href="https://calendly.com/tanmaybhardwaj4444/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm px-6 py-2.5 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors duration-300 tracking-wide uppercase"
               >
                 Initiate Protocol

@@ -82,7 +82,7 @@ export default function ProblemSolution() {
               
               <div className="mt-12">
                 <p className="text-muted text-sm mb-6">Stop hoping for virality. Let&apos;s engineer a machine that prints users.</p>
-                <a href="#contact" className="inline-flex items-center gap-2 text-accent text-sm font-medium tracking-widest uppercase hover:text-fg transition-colors">
+                <a href="https://calendly.com/tanmaybhardwaj4444/30min" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-accent text-sm font-medium tracking-widest uppercase hover:text-fg transition-colors">
                   Deploy the Engine
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 8h10M9 4l4 4-4 4" />

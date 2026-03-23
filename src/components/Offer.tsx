@@ -63,7 +63,9 @@ export default function Offer() {
           <div className="flex justify-center border-t border-border pt-10">
             <MagneticButton
               as="a"
-              href="#contact"
+              href="https://calendly.com/tanmaybhardwaj4444/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-accent text-bg text-sm font-medium px-10 py-4 tracking-wide uppercase hover:bg-fg transition-colors duration-300"
             >
               Initiate Sprint

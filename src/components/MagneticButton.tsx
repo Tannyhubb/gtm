@@ -8,6 +8,8 @@ interface MagneticButtonProps {
   className?: string;
   as?: "button" | "a";
   href?: string;
+  target?: string;
+  rel?: string;
   strength?: number;
   onClick?: () => void;
 }
@@ -17,6 +19,8 @@ export default function MagneticButton({
   className = "",
   as: Tag = "button",
   href,
+  target,
+  rel,
   strength = 0.3,
   onClick,
 }: MagneticButtonProps) {
@@ -54,6 +58,8 @@ export default function MagneticButton({
     <MotionTag
       ref={ref as React.RefObject<HTMLButtonElement & HTMLAnchorElement>}
       href={Tag === "a" ? href : undefined}
+      target={Tag === "a" ? target : undefined}
+      rel={Tag === "a" ? rel : undefined}
       className={className}
       style={{ x, y }}
       onMouseMove={handleMouseMove}
