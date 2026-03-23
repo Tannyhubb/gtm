@@ -1,12 +1,46 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import SplitText from "./SplitText";
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const [formData, setFormData] = useState({
+    name: "",
+    stage: "",
+    bottleneck: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.stage || !formData.bottleneck) {
+      alert("Please fill in all coordinates before deploying.");
+      return;
+    }
+
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to submit");
+      
+      setStatus("success");
+      setFormData({ name: "", stage: "", bottleneck: "" });
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  };
 
   return (
     <section id="contact" ref={ref} className="section-padding py-section">
@@ -32,48 +66,79 @@ export default function Contact() {
           </div>
 
           <motion.div
-            className="bg-[#0F0F0F] border border-border p-8 md:p-10"
+            className="bg-[#0F0F0F] border border-border p-8 md:p-10 relative overflow-hidden"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.5 }}
           >
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="block text-sm text-fg mb-2">System Name & URL</label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. Acme Inc (acme.com)"
-                  className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors"
-                />
+            {status === "success" ? (
+              <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center space-y-4">
+                <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mb-4">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <h3 className="font-heading text-3xl text-fg">Coordinates Received.</h3>
+                <p className="text-muted">We will intercept your transmission shortly.</p>
+                <button 
+                  onClick={() => setStatus("idle")}
+                  className="mt-8 text-sm text-accent uppercase tracking-widest hover:text-fg transition-colors"
+                >
+                  Return to Dashboard
+                </button>
               </div>
+            ) : (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <label className="block text-sm text-fg mb-2">System Name & URL</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Acme Inc (acme.com)"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors"
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm text-fg mb-2">Operational Phase</label>
-                <select className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors appearance-none" defaultValue="">
-                  <option value="" disabled>Select stage...</option>
-                  <option value="idea">Pre-Launch / Building</option>
-                  <option value="mvp">MVP Ready</option>
-                  <option value="early_traction">Early Traction (1-5 customers)</option>
-                  <option value="scaling">Scaling (10+ customers)</option>
-                </select>
-              </div>
+                <div>
+                  <label className="block text-sm text-fg mb-2">Operational Phase</label>
+                  <select 
+                    className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors appearance-none" 
+                    value={formData.stage}
+                    onChange={(e) => setFormData({ ...formData, stage: e.target.value })}
+                  >
+                    <option value="" disabled>Select stage...</option>
+                    <option value="Pre-Launch / Building">Pre-Launch / Building</option>
+                    <option value="MVP Ready">MVP Ready</option>
+                    <option value="Early Traction (1-5 customers)">Early Traction (1-5 customers)</option>
+                    <option value="Scaling (10+ customers)">Scaling (10+ customers)</option>
+                  </select>
+                </div>
 
-              <div>
-                <label className="block text-sm text-fg mb-2">Primary Bottleneck</label>
-                <textarea 
-                  rows={3}
-                  placeholder="What's killing your growth right now?"
-                  className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors resize-none"
-                ></textarea>
-              </div>
+                <div>
+                  <label className="block text-sm text-fg mb-2">Primary Bottleneck</label>
+                  <textarea 
+                    rows={3}
+                    placeholder="What's killing your growth right now?"
+                    value={formData.bottleneck}
+                    onChange={(e) => setFormData({ ...formData, bottleneck: e.target.value })}
+                    className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors resize-none"
+                  ></textarea>
+                </div>
 
-              <button
-                type="submit"
-                className="w-full bg-accent text-bg text-sm font-medium tracking-wide uppercase py-4 hover:bg-fg transition-colors duration-300 mt-4"
-              >
-                Deploy Protocol
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full bg-accent text-bg text-sm font-medium tracking-wide uppercase py-4 hover:bg-fg transition-colors duration-300 mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                >
+                  {status === "loading" ? "Transmitting..." : "Deploy Protocol"}
+                </button>
+                {status === "error" && (
+                  <p className="text-red-500 text-sm mt-2 text-center">Transmission failed. Please check your connection.</p>
+                )}
+              </form>
+            )}
           </motion.div>
         </div>
       </div>
