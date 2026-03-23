@@ -79,19 +79,13 @@ body {
   }
 }
 
-/* Lenis Recommended Global Defaults */
-html.lenis, html.lenis body {
-  height: auto;
+/* Premium CSS Scroll Snapping (Replaces Lenis) */
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
 }
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }

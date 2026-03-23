@@ -1,20 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   
-  // Floating anti-gravity lagging ring
-  const cursorXDelayed = useSpring(0, { stiffness: 100, damping: 25, mass: 0.5 });
-  const cursorYDelayed = useSpring(0, { stiffness: 100, damping: 25, mass: 0.5 });
+  // Zero-lag immediate motion values
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
 
   useEffect(() => {
     // We bind event listeners globally with { passive: true } for max performance
     const moveCursor = (e: MouseEvent) => {
-      cursorXDelayed.set(e.clientX);
-      cursorYDelayed.set(e.clientY);
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     // Lightweight event delegation instead of deep DOM traversal on every pixel
@@ -37,7 +37,7 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [cursorXDelayed, cursorYDelayed]);
+  }, [cursorX, cursorY]);
 
   return (
     <>
@@ -45,8 +45,8 @@ export default function CustomCursor() {
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full mix-blend-difference bg-white flex items-center justify-center transition-all duration-200 ease-out"
         style={{
-          x: cursorXDelayed,
-          y: cursorYDelayed,
+          x: cursorX,
+          y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
           width: isHovered ? 80 : 20,
