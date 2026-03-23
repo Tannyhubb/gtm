@@ -5,36 +5,39 @@ import { motion, useSpring, AnimatePresence } from "framer-motion";
 
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
-  const [cursorText, setCursorText] = useState("");
-  const cursorX = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
-  const cursorY = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
   
-  const cursorXDelayed = useSpring(0, { stiffness: 150, damping: 20 });
-  const cursorYDelayed = useSpring(0, { stiffness: 150, damping: 20 });
+  // Fast tracking for the core dot
+  const cursorX = useSpring(0, { stiffness: 800, damping: 40 });
+  const cursorY = useSpring(0, { stiffness: 800, damping: 40 });
   
+  // Floating anti-gravity lagging ring
+  const cursorXDelayed = useSpring(0, { stiffness: 100, damping: 25, mass: 0.5 });
+  const cursorYDelayed = useSpring(0, { stiffness: 100, damping: 25, mass: 0.5 });
+
   useEffect(() => {
+    // We bind event listeners globally with { passive: true } for max performance
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       cursorXDelayed.set(e.clientX);
       cursorYDelayed.set(e.clientY);
     };
-    
+
+    // Lightweight event delegation instead of deep DOM traversal on every pixel
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const hoverTarget = target.closest("a, button, [role='button'], .hover-target, [data-cursor-text]");
-      if (hoverTarget) {
-        setIsHovered(true);
-        const text = hoverTarget.getAttribute("data-cursor-text");
-        setCursorText(text || "");
-      } else {
-        setIsHovered(false);
-        setCursorText("");
-      }
+      // Simple check for interactables
+      const isInteractable = 
+        target.tagName === 'A' || 
+        target.tagName === 'BUTTON' || 
+        target.closest('a') !== null || 
+        target.closest('button') !== null;
+      
+      setIsHovered(isInteractable);
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
     
     return () => {
       window.removeEventListener("mousemove", moveCursor);
@@ -44,43 +47,33 @@ export default function CustomCursor() {
 
   return (
     <>
+      {/* The Core Antigravity Dot */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[9999] w-2 h-2 rounded-full bg-fg mix-blend-difference"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] w-2 h-2 rounded-full mix-blend-difference bg-accent"
         style={{
           x: cursorX,
           y: cursorY,
           translateX: "-50%",
-          translateY: "-50%"
+          translateY: "-50%",
+          opacity: isHovered ? 0 : 1, // Fades out into the ring on hover
         }}
       />
       
+      {/* The Magnetic Orbital Ring */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full border border-fg/30 flex items-center justify-center transition-colors duration-300 overflow-hidden"
+        className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full mix-blend-difference flex items-center justify-center border transition-all duration-300 ease-out"
         style={{
           x: cursorXDelayed,
           y: cursorYDelayed,
           translateX: "-50%",
           translateY: "-50%",
-          width: cursorText ? 100 : 40,
-          height: cursorText ? 100 : 40,
-          scale: isHovered && !cursorText ? 1.5 : 1,
-          backgroundColor: isHovered ? "rgba(245, 244, 240, 0.1)" : "transparent",
-          backdropFilter: isHovered ? "blur(4px)" : "none",
+          width: isHovered ? 60 : 32,
+          height: isHovered ? 60 : 32,
+          backgroundColor: isHovered ? "rgba(232, 160, 69, 0.2)" : "transparent",
+          borderColor: isHovered ? "rgba(232, 160, 69, 0)" : "rgba(245, 244, 240, 0.4)",
+          boxShadow: isHovered ? "0 0 20px rgba(232, 160, 69, 0.5)" : "none",
         }}
-      >
-        <AnimatePresence>
-          {cursorText && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              className="text-[10px] uppercase font-bold tracking-widest text-fg text-center px-2 leading-tight"
-            >
-              {cursorText}
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.div>
+      />
     </>
   );
 }
