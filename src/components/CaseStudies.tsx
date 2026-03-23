@@ -111,6 +111,7 @@ export default function CaseStudies() {
                       className={`w-full aspect-video bg-gradient-to-br ${cs.gradient} rounded-md relative flex items-center justify-center overflow-hidden mb-8 bg-[#111]`}
                     >
                       {/* Base Image with hover-reveal */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img 
                         src={cs.image} 
                         alt={cs.client} 
@@ -185,6 +186,7 @@ export default function CaseStudies() {
                   layoutId={`card-image-${activeCaseData.id}`}
                   className={`w-full h-[50vh] shrink-0 bg-gradient-to-br ${activeCaseData.gradient} relative flex flex-col items-center justify-center mt-12 bg-[#0A0A0A] overflow-hidden`}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={activeCaseData.image} 
                     alt={activeCaseData.client} 

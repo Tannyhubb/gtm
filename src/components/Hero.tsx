@@ -136,7 +136,7 @@ export default function Hero() {
             { value: "14", label: "Day Sprint" },
             { value: "10x", label: "Traction Goal" },
             { value: "100%", label: "Operator Led" },
-          ].map((stat, i) => (
+          ].map((stat) => (
             <motion.div 
               key={stat.label}
               whileHover={{ y: -5, scale: 1.05 }}

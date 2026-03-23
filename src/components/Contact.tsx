@@ -27,7 +27,7 @@ export default function Contact() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.3 }}
             >
-              Submit your coordinates. If your product is a fit for our scaling protocol, we'll schedule a brutal, no-BS teardown.
+              Submit your coordinates. If your product is a fit for our scaling protocol, we&apos;ll schedule a brutal, no-BS teardown.
             </motion.p>
           </div>
 

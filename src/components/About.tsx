@@ -23,7 +23,7 @@ export default function About() {
           <div>
             <p className="text-sm text-accent tracking-widest uppercase mb-4">The Engineer</p>
             <h2 className="font-heading text-display text-fg mb-8">
-              <SplitText>We don't build pitch decks. We build revenue engines.</SplitText>
+              <SplitText>We don&apos;t build pitch decks. We build revenue engines.</SplitText>
             </h2>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

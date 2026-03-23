@@ -29,7 +29,7 @@ export default function ProblemSolution() {
           <div className="flex flex-col">
             <p className="text-sm text-muted tracking-widest uppercase mb-4">The Problem</p>
             <h2 className="font-heading text-heading text-fg mb-12">
-              <SplitText>You're Building in the Dark</SplitText>
+              <SplitText>You&apos;re Building in the Dark</SplitText>
             </h2>
             
             <div className="flex flex-col gap-6">
@@ -81,7 +81,7 @@ export default function ProblemSolution() {
               </ul>
               
               <div className="mt-12">
-                <p className="text-muted text-sm mb-6">Stop hoping for virality. Let's engineer a machine that prints users.</p>
+                <p className="text-muted text-sm mb-6">Stop hoping for virality. Let&apos;s engineer a machine that prints users.</p>
                 <a href="#contact" className="inline-flex items-center gap-2 text-accent text-sm font-medium tracking-widest uppercase hover:text-fg transition-colors">
                   Deploy the Engine
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

@@ -17,7 +17,7 @@ export default function TargetAudience() {
             <SplitText>Are we a fit?</SplitText>
           </h2>
           <p className="text-muted max-w-[600px] mx-auto">
-            We don't take everyone. We optimize for founders who execute fast and have a product that actually works in reality.
+            We don&apos;t take everyone. We optimize for founders who execute fast and have a product that actually works in reality.
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export default function TargetAudience() {
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-red-500/70 mt-1">✕</span>
-                <span className="text-fg/90">Wantrepreneurs with "just an idea" and zero execution</span>
+                <span className="text-fg/90">Wantrepreneurs with &quot;just an idea&quot; and zero execution</span>
               </li>
             </ul>
           </motion.div>

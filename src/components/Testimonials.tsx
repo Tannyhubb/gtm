@@ -38,7 +38,7 @@ export default function Testimonials() {
         <div className="mb-20 text-center flex flex-col items-center">
           <p className="text-sm text-accent tracking-widest uppercase mb-4">The Proof</p>
           <h2 className="font-heading text-display text-fg max-w-[800px]">
-            <SplitText>Don't just take my word for it</SplitText>
+            <SplitText>Don&apos;t just take my word for it</SplitText>
           </h2>
         </div>
 
@@ -59,11 +59,11 @@ export default function Testimonials() {
             >
               {/* Quote Mark */}
               <div className="absolute top-8 left-8 text-6xl text-accent/10 font-heading leading-none pointer-events-none select-none">
-                "
+                &quot;
               </div>
               
               <p className="text-lg md:text-xl leading-relaxed text-muted relative z-10 mb-8 pt-6">
-                "{t.quote}"
+                &quot;{t.quote}&quot;
               </p>
               
               <div className="flex items-center gap-4 relative z-10 pt-6 border-t border-border">
