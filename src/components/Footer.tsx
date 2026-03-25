@@ -27,7 +27,7 @@ export default function Footer() {
             <div className="font-mono text-xl tracking-tight flex items-center">
               <span className="text-accent mr-2">{">"}</span>
               <span className="text-fg font-bold">buildyour.company</span>
-              <motion.span 
+              <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ repeat: Infinity, duration: 0.8 }}
                 className="text-accent ml-0.5 mt-1"
