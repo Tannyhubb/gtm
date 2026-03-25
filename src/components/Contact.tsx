@@ -104,7 +104,7 @@ export default function Contact() {
                 <div>
                   <label className="block text-sm text-fg mb-2">Operational Phase</label>
                   <select 
-                    className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors appearance-none" 
+                    className="w-full bg-border/30 border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors appearance-none" 
                     value={formData.stage}
                     onChange={(e) => setFormData({ ...formData, stage: e.target.value })}
                   >
@@ -123,7 +123,7 @@ export default function Contact() {
                     placeholder="What's killing your growth right now?"
                     value={formData.bottleneck}
                     onChange={(e) => setFormData({ ...formData, bottleneck: e.target.value })}
-                    className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors resize-none"
+                    className="w-full bg-border/30 border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors resize-none"
                   ></textarea>
                 </div>
 
