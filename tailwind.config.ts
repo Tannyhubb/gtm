@@ -10,11 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0A0A0A",
-        fg: "#F5F4F0",
-        accent: "#E8A045",
-        border: "#1F1F1F",
-        muted: "#888888",
+        bg: "var(--color-bg)",
+        fg: "var(--color-fg)",
+        accent: "var(--color-accent)",
+        border: "var(--color-border)",
+        muted: "var(--color-muted)",
       },
       fontFamily: {
         heading: ["var(--font-heading)", "serif"],
@@ -30,7 +30,7 @@ const config: Config = {
         section: "clamp(5rem, 12vw, 10rem)",
       },
       borderColor: {
-        DEFAULT: "#1F1F1F",
+        DEFAULT: "var(--color-border)",
       },
       transitionTimingFunction: {
         spring: "cubic-bezier(0.16, 1, 0.3, 1)",
