@@ -19,7 +19,7 @@ export default function Offer() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   return (
-    <section id="offer" ref={sectionRef} className="section-padding py-section bg-[#050505]">
+    <section id="offer" ref={sectionRef} className="section-padding py-section bg-bg">
       <div className="container-wide">
         <div className="max-w-[800px] mx-auto text-center mb-16">
           <p className="text-sm text-accent tracking-widest uppercase mb-4">The Arsenal</p>
@@ -33,7 +33,7 @@ export default function Offer() {
 
         <MagneticCard className="max-w-[900px] mx-auto relative z-10 w-full">
           <motion.div 
-            className="w-full border border-border bg-[#0A0A0A]/60 backdrop-blur-xl p-8 md:p-12 relative overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
+            className="w-full border border-border bg-bg/80 backdrop-blur-xl p-8 md:p-12 relative overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.3)]"
             initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}

@@ -36,7 +36,7 @@ export default function ProblemSolution() {
               {problemCards.map((p, i) => (
                 <motion.div
                   key={i}
-                  className="p-6 border border-border bg-[#0F0F0F]"
+                  className="p-6 border border-border bg-bg"
                   initial={{ opacity: 0, x: -30, filter: "blur(10px)" }}
                   animate={isInView ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
                   transition={{ type: "spring", stiffness: 100, damping: 20, delay: i * 0.1 }}
@@ -56,8 +56,7 @@ export default function ProblemSolution() {
             </h2>
 
             <motion.div
-              className="p-8 md:p-12 border border-accent/30 bg-[#14100A]/80 backdrop-blur-xl h-full flex flex-col justify-center shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
-              initial={{ opacity: 0, scale: 0.95, filter: "blur(15px)" }}
+              className="p-8 md:p-12 border border-accent/30 bg-accent/5 backdrop-blur-xl h-full flex flex-col justify-center shadow-[0_30px_60px_rgba(0,0,0,0.3)]"              initial={{ opacity: 0, scale: 0.95, filter: "blur(15px)" }}
               animate={isInView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : {}}
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
             >

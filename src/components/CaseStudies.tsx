@@ -95,7 +95,7 @@ export default function CaseStudies() {
                     layoutId={`card-container-${cs.id}`}
                     onClick={() => toggleModal(cs.id)}
                     data-cursor-text="View Project"
-                    className="group border border-border p-6 md:p-8 hover:border-accent/30 transition-all duration-500 cursor-pointer bg-[#0A0A0A]/40 backdrop-blur-xl hover:bg-[#111111]/80 hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] relative overflow-hidden"
+                    className="group border border-border p-6 md:p-8 hover:border-accent/30 transition-all duration-500 cursor-pointer bg-bg/40 backdrop-blur-xl hover:bg-bg hover:shadow-[0_30px_60px_rgba(0,0,0,0.3)] relative overflow-hidden"
                     initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{
@@ -108,7 +108,7 @@ export default function CaseStudies() {
                     {/* Simulated Screenshot Frame (now rendering images) */}
                     <motion.div 
                       layoutId={`card-image-${cs.id}`}
-                      className={`w-full aspect-video bg-gradient-to-br ${cs.gradient} rounded-md relative flex items-center justify-center overflow-hidden mb-8 bg-[#111]`}
+                      className={`w-full aspect-video bg-gradient-to-br ${cs.gradient} rounded-md relative flex items-center justify-center overflow-hidden mb-8 bg-bg`}
                     >
                       {/* Base Image with hover-reveal */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -167,7 +167,7 @@ export default function CaseStudies() {
             <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 md:p-12 pointer-events-none">
               <motion.div
                 layoutId={`card-container-${activeCaseData.id}`}
-                className="w-full max-w-5xl bg-[#0A0A0A] border border-border overflow-hidden pointer-events-auto shadow-[0_40px_100px_rgba(0,0,0,0.8)] relative"
+                className="w-full max-w-5xl bg-bg border border-border overflow-hidden pointer-events-auto shadow-[0_40px_100px_rgba(0,0,0,0.5)] relative"
                 style={{ maxHeight: "90vh", display: "flex", flexDirection: "column" }}
               >
                 {/* Modal Header */}
@@ -184,9 +184,9 @@ export default function CaseStudies() {
                 {/* Simulated Full Screenshot */}
                 <motion.div 
                   layoutId={`card-image-${activeCaseData.id}`}
-                  className={`w-full h-[50vh] shrink-0 bg-gradient-to-br ${activeCaseData.gradient} relative flex flex-col items-center justify-center mt-12 bg-[#0A0A0A] overflow-hidden`}
+                  className={`w-full h-[50vh] shrink-0 bg-gradient-to-br ${activeCaseData.gradient} relative flex flex-col items-center justify-center mt-12 bg-bg overflow-hidden`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {/* eslint-disable-next/next/no-img-element */}
                   <img 
                     src={activeCaseData.image} 
                     alt={activeCaseData.client} 
@@ -203,7 +203,7 @@ export default function CaseStudies() {
 
                   <h4 className="font-heading text-5xl md:text-7xl text-fg/80 mix-blend-overlay z-20 font-bold mb-4 drop-shadow-2xl">{activeCaseData.client}</h4>
                   
-                  <div className="w-1/2 h-1/2 bg-[#0A0A0A]/80 backdrop-blur-md border border-fg/10 rounded overflow-hidden shadow-2xl relative z-20 flex flex-col items-center p-8 gap-4 justify-center">
+                  <div className="w-1/2 h-1/2 bg-bg/80 backdrop-blur-md border border-fg/10 rounded overflow-hidden shadow-2xl relative z-20 flex flex-col items-center p-8 gap-4 justify-center">
                      <p className="text-accent text-lg">System Active</p>
                      <p className="text-fg text-2xl font-heading">{activeCaseData.metric}</p>
                   </div>

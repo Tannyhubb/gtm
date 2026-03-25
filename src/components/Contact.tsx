@@ -66,7 +66,7 @@ export default function Contact() {
           </div>
 
           <motion.div
-            className="bg-[#0F0F0F] border border-border p-8 md:p-10 relative overflow-hidden"
+            className="bg-bg border border-border p-8 md:p-10 relative overflow-hidden"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.5 }}
@@ -97,7 +97,7 @@ export default function Contact() {
                     placeholder="e.g. Acme Inc (acme.com)"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#1A1A1A] border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors"
+                    className="w-full bg-border/30 border border-transparent focus:border-accent text-fg p-4 outline-none transition-colors"
                   />
                 </div>
 

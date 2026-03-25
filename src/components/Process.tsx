@@ -54,7 +54,7 @@ export default function Process() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ type: "spring", stiffness: 100, damping: 20, delay: i * 0.15 + 0.2 }}
               >
-                <div className="w-24 h-24 rounded-full bg-[#111] border border-border flex items-center justify-center font-heading text-3xl text-accent mb-8 shadow-[0_0_30px_rgba(232,160,69,0.05)] bg-[#0A0A0A]">
+                <div className="w-24 h-24 rounded-full bg-bg border border-border flex items-center justify-center font-heading text-3xl text-accent mb-8 shadow-[0_0_30px_rgba(232,160,69,0.05)]">
                   {step.number}
                 </div>
                 <h3 className="font-heading text-2xl text-fg mb-4">{step.title}</h3>

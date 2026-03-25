@@ -32,7 +32,7 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <section id="proof" ref={ref} className="section-padding py-section bg-[#050505]">
+    <section id="proof" ref={ref} className="section-padding py-section bg-bg">
       <div className="container-wide">
         {/* Section Header */}
         <div className="mb-20 text-center flex flex-col items-center">
@@ -47,7 +47,7 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <motion.div
               key={t.company}
-              className="p-8 md:p-12 border border-border bg-[#0A0A0A] hover:border-accent/30 transition-colors duration-500 relative flex flex-col justify-between"
+              className="p-8 md:p-12 border border-border bg-bg hover:border-accent/30 transition-colors duration-500 relative flex flex-col justify-between"
               initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
               animate={isInView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : {}}
               transition={{
@@ -67,7 +67,7 @@ export default function Testimonials() {
               </p>
               
               <div className="flex items-center gap-4 relative z-10 pt-6 border-t border-border">
-                <div className="w-10 h-10 bg-[#111] border border-border flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 bg-bg border border-border flex items-center justify-center shrink-0">
                   <span className="font-heading text-lg text-accent">{t.company.charAt(0)}</span>
                 </div>
                 <div>

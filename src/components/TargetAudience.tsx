@@ -9,7 +9,7 @@ export default function TargetAudience() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   return (
-    <section id="audience" ref={sectionRef} className="section-padding py-section bg-[#0A0A0A]">
+    <section id="audience" ref={sectionRef} className="section-padding py-section bg-bg">
       <div className="container-wide">
         <div className="text-center mb-16">
           <p className="text-sm text-accent tracking-widest uppercase mb-4">Qualification</p>
@@ -24,7 +24,7 @@ export default function TargetAudience() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1000px] mx-auto">
           {/* Who It's For */}
           <motion.div
-            className="border border-accent/20 bg-[#110D08] p-8 md:p-12 relative overflow-hidden flex flex-col items-center text-center"
+            className="border border-accent/20 bg-accent/5 p-8 md:p-12 relative overflow-hidden flex flex-col items-center text-center"
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
@@ -49,7 +49,7 @@ export default function TargetAudience() {
 
           {/* Who It's Not For */}
           <motion.div
-            className="border border-border bg-[#0F0F0F] p-8 md:p-12 relative overflow-hidden flex flex-col items-center text-center"
+            className="border border-border bg-bg p-8 md:p-12 relative overflow-hidden flex flex-col items-center text-center"
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.3 }}

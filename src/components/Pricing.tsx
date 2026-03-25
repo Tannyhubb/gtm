@@ -53,8 +53,8 @@ export default function Pricing() {
               key={plan.title}
               className={`p-8 md:p-10 flex flex-col border ${
                 plan.highlight 
-                  ? "border-accent bg-[#110D08]" 
-                  : "border-border bg-[#0A0A0A]"
+                  ? "border-accent bg-accent/5" 
+                  : "border-border bg-bg"
               }`}
               initial={{ opacity: 0, y: 40, filter: "blur(15px)" }}
               animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
