@@ -5,6 +5,8 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import NoiseOverlay from "@/components/NoiseOverlay";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,11 +56,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
       <body className="antialiased cursor-none bg-bg text-fg">
-        <SmoothScroll>
-          <NoiseOverlay />
-          <CustomCursor />
-          {children}
-        </SmoothScroll>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SmoothScroll>
+            <NoiseOverlay />
+            <CustomCursor />
+            <ThemeSwitcher />
+            {children}
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

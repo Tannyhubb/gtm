@@ -3,12 +3,22 @@
 @tailwind utilities;
 
 /* ── Design Tokens ── */
-:root {
-  --color-bg: #0A0A0A;
-  --color-fg: #F5F4F0;
-  --color-accent: #E8A045;
-  --color-border: #1F1F1F;
-  --color-muted: #888888;
+@layer base {
+  :root {
+    --color-bg: #F5F4F0;
+    --color-fg: #0A0A0A;
+    --color-accent: #E8A045;
+    --color-border: #E5E5E5;
+    --color-muted: #888888;
+  }
+
+  .dark {
+    --color-bg: #0A0A0A;
+    --color-fg: #F5F4F0;
+    --color-accent: #E8A045;
+    --color-border: #1F1F1F;
+    --color-muted: #888888;
+  }
 }
 
 /* ── Base Reset ── */
