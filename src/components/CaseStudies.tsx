@@ -12,7 +12,7 @@ const caseStudies = [
     industry: "AI / Productivity",
     metric: "Productize Task AI",
     description: "Built a seamless AI integration to automate and streamline task management processes.",
-    image: "/images/colado.png",
+    image: "/images/colado.jpeg",
     gradient: "from-zinc-500/20 to-zinc-800/20",
     mockupPattern: "bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:16px_16px]",
   },
@@ -32,39 +32,30 @@ const caseStudies = [
     industry: "SaaS / AI",
     metric: "Subscription AI",
     description: "Designed a premium onboarding experience and churn-reduction system for subscription management.",
-    image: "/images/synora.png",
+    image: "/images/synora.jpeg",
     gradient: "from-zinc-500/20 to-zinc-800/20",
     mockupPattern: "bg-[linear-gradient(90deg,#ffffff11_1px,transparent_1px),linear-gradient(#ffffff11_1px,transparent_1px)] [background-size:20px_20px]",
   },
-  {
-    id: "smashclash",
-    client: "Smash & Clash",
-    industry: "Gaming",
-    metric: "Strategic Board Game",
-    description: "Engineered a targeted launch campaign that built a highly engaged early-adopter community.",
-    image: "/images/smashclash.png",
-    gradient: "from-zinc-500/20 to-zinc-800/20",
-    mockupPattern: "bg-[repeating-linear-gradient(45deg,#ffffff05,#ffffff05_10px,transparent_10px,transparent_20px)]",
-  },
-  {
-    id: "turing",
-    client: "Turing Community",
-    industry: "Community / Education",
-    metric: "10k+ Active Members",
-    description: "Scaled their college community into a nationwide tech hub using viral engineering ambassador loops and gamified Discord events.",
-    image: "/images/turing.png",
-    gradient: "from-emerald-500/20 to-teal-500/20",
-    mockupPattern: "bg-[linear-gradient(90deg,#ffffff11_1px,transparent_1px),linear-gradient(#ffffff11_1px,transparent_1px)] [background-size:20px_20px]",
-  },
+
   {
     id: "ffc",
     client: "Fun Friend Chicken",
     industry: "F&B / Local Brand",
     metric: "Fully Booked Launch",
     description: "Designed a localized hyper-targeted social media blast combined with heavy influencer activations across Delhi NCR.",
-    image: "/images/ffc.png",
+    image: "/images/ffc.jpg",
     gradient: "from-yellow-500/20 to-orange-500/20",
     mockupPattern: "bg-[repeating-linear-gradient(45deg,#ffffff05,#ffffff05_10px,transparent_10px,transparent_20px)]",
+  },
+  {
+    id: "verage",
+    client: "Verage Bags",
+    industry: "E-Commerce / D2C",
+    metric: "Social Media Growth",
+    description: "Built a sustainable, authentic social media presence that connected deeply with their core audience and drove organic engagement.",
+    image: "/images/verage.png",
+    gradient: "from-orange-500/20 to-red-500/20",
+    mockupPattern: "bg-[linear-gradient(45deg,#ffffff11_25%,transparent_25%,transparent_75%,#ffffff11_75%,#ffffff11)] [background-size:20px_20px]",
   },
 ];
 
@@ -135,18 +126,17 @@ export default function CaseStudies() {
                       <img 
                         src={cs.image} 
                         alt={cs.client} 
-                        className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-500 z-0"
+                        className="absolute inset-0 w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500 z-0"
                         onError={(e) => {
-                          // Fallback if image doesn't exist yet
                           e.currentTarget.style.display = 'none';
                         }}
                       />
                       
                       <div className={`absolute inset-0 ${cs.mockupPattern} opacity-30 z-0 pointer-events-none group-hover:opacity-0 transition-opacity duration-500`}></div>
-                      <div className="absolute inset-0 backdrop-blur-[2px] group-hover:backdrop-blur-none transition-all duration-500 z-0 pointer-events-none"></div>
+
                       
                       {/* Name fades out when hovering over the image */}
-                      <h4 className="font-heading text-3xl text-fg/80 mix-blend-overlay z-10 font-bold group-hover:opacity-0 transition-opacity duration-500 drop-shadow-2xl">{cs.client}</h4>
+                      <h4 className="font-heading text-3xl text-fg/80 z-10 font-bold group-hover:opacity-0 transition-opacity duration-500 drop-shadow-2xl">{cs.client}</h4>
                     </motion.div>
 
                     <div className="flex items-center justify-between mb-4">
@@ -210,7 +200,7 @@ export default function CaseStudies() {
                   <img 
                     src={activeCaseData.image} 
                     alt={activeCaseData.client} 
-                    className="absolute inset-0 w-full h-full object-cover opacity-80 z-0 mix-blend-lighten"
+                    className="absolute inset-0 w-full h-full object-contain p-12 lg:p-24 opacity-80 z-0"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
@@ -221,12 +211,7 @@ export default function CaseStudies() {
                   {/* Bottom Vignette for text legibility */}
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0A] to-transparent z-10 pointer-events-none"></div>
 
-                  <h4 className="font-heading text-5xl md:text-7xl text-fg/80 mix-blend-overlay z-20 font-bold mb-4 drop-shadow-2xl">{activeCaseData.client}</h4>
-                  
-                  <div className="w-1/2 h-1/2 bg-bg/80 backdrop-blur-md border border-fg/10 rounded overflow-hidden shadow-2xl relative z-20 flex flex-col items-center p-8 gap-4 justify-center">
-                     <p className="text-accent text-lg">System Active</p>
-                     <p className="text-fg text-2xl font-heading">{activeCaseData.metric}</p>
-                  </div>
+                  <h4 className="font-heading text-5xl md:text-7xl text-fg/80 z-20 font-bold mb-4 drop-shadow-2xl">{activeCaseData.client}</h4>
                 </motion.div>
 
                 {/* Modal Content */}

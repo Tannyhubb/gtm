@@ -68,7 +68,11 @@ export default function TargetAudience() {
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-red-500/70 mt-1">✕</span>
-                <span className="text-fg/90">Wantrepreneurs with &quot;just an idea&quot; and zero execution</span>
+                <span className="text-fg/90">Drop-shippers & wantrepreneurs with zero execution</span>
+              </li>
+              <li className="flex items-start gap-4">
+                <span className="text-red-500/70 mt-1">✕</span>
+                <span className="text-fg/90">Founders looking to "just run some Facebook ads"</span>
               </li>
             </ul>
           </motion.div>

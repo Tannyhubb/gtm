@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "#offer" },
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },

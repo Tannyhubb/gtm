@@ -3,15 +3,15 @@
 import { motion } from "framer-motion";
 
 const footerLinks = [
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "#offer" },
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
 const socialLinks = [
-  { label: "LinkedIn", href: "#" },
-  { label: "Twitter", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/tanmay-bhardwaj-12b453332/" },
+  { label: "X", href: "https://x.com/TanmayBhar86173" },
 ];
 
 export default function Footer() {
@@ -53,6 +53,8 @@ export default function Footer() {
               <a
                 key={link.label}
                 href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm text-muted hover:text-fg transition-colors duration-300"
               >
                 {link.label}

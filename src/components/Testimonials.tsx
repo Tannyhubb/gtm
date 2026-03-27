@@ -20,20 +20,16 @@ const testimonials = [
     author: "Anamika",
     company: "Synora",
   },
-  {
-    quote: "They didn't just market a game; they built an entire engaged community of early adopters before we even launched. Incredible ROI.",
-    author: "Harshit Khemani",
-    company: "Smash & Clash",
-  },
-  {
-    quote: "Scaling a college community into a nationwide tech hub is notoriously hard. The viral loops and ambassador frameworks they engineered for us took us past 10,000 active members faster than we thought possible.",
-    author: "Head of Community",
-    company: "Turing Community",
-  },
+
   {
     quote: "Launching a local F&B brand in Delhi NCR is brutal. Their hyper-targeted influencer activations and social blast strategy meant we were fully booked from day one. They think like operators, not just marketers.",
     author: "Owner",
     company: "Fun Friend Chicken",
+  },
+  {
+    quote: "They didn't just throw money at ads; they genuinely understood our brand voice and built an organic social media presence that our audience actually cares about.",
+    author: "Saarthak Gupta",
+    company: "Verage Bags",
   },
 ];
 
