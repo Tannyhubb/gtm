@@ -45,7 +45,7 @@ export default function Contact() {
       try {
         const parsed = JSON.parse(saved);
         setFormData((prev) => ({ ...prev, ...parsed }));
-      } catch (e) {}
+      } catch {}
     }
   }, []);
 
@@ -127,7 +127,7 @@ export default function Contact() {
             <button
               key={opt}
               type="button"
-              onClick={() => updateForm({ [field]: opt } as any)}
+              onClick={() => updateForm({ [field]: opt } as Partial<FormData>)}
               className={`w-full flex items-center justify-between p-5 border text-left transition-all duration-300 rounded-sm ${
                 isSelected 
                   ? "border-accent bg-accent/5 backdrop-blur-md" 
@@ -162,7 +162,7 @@ export default function Contact() {
                 let newArr = [...arr];
                 if (isSelected) newArr = newArr.filter(i => i !== opt);
                 else newArr.push(opt);
-                updateForm({ [field]: newArr } as any);
+                updateForm({ [field]: newArr } as Partial<FormData>);
               }}
               className={`w-full flex items-center gap-4 p-5 border text-left transition-all duration-300 rounded-sm ${
                 isSelected 
