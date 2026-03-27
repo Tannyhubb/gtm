@@ -131,7 +131,7 @@ export default function Hero() {
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.0, duration: 0.6 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
         >
           {[
             { value: "0-1", label: "Scaling Phase" },

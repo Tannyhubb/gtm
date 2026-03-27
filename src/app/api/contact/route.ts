@@ -4,14 +4,14 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { 
-      name, contactInfo, building, stage, budget, timeline 
+      name, email, phone, building, stage, timeline, budget, needs, context 
     } = body;
 
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     // Validation
-    if (!name || !contactInfo || !building) {
+    if (!name || !email || !building) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -27,19 +27,28 @@ export async function POST(req: Request) {
     }
 
     const message = `
-🚨 *New Founder Intake Application* 🚨
+🚀 *New Inquiry Form Submission* 🚀
 
-*FOUNDER INFO*
+*BASIC DETAILS*
 *Name:* ${name}
-*Contact:* ${contactInfo}
+*Email:* ${email}
+*Phone:* ${phone || 'Not provided'}
 
-*THE BUILD*
+*YOUR IDEA*
 *Building:* ${building}
+
+*WHERE YOU ARE*
 *Stage:* ${stage || 'Not provided'}
 
-*LOGISTICS*
+*TIMELINE & BUDGET*
+*Launch:* ${timeline || 'Not provided'}
 *Budget:* ${budget || 'Not provided'}
-*Timeline:* ${timeline || 'Not provided'}
+
+*WHAT YOU NEED*
+*Needs:* ${(needs || []).join(', ')}
+
+*CONTEXT*
+*Extra info:* ${context || 'None'}
     `;
 
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

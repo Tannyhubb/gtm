@@ -22,9 +22,9 @@ export default function Offer() {
     <section id="offer" ref={sectionRef} className="section-padding py-section bg-bg">
       <div className="container-wide">
         <div className="max-w-[800px] mx-auto text-center mb-16">
-          <p className="text-sm text-accent tracking-widest uppercase mb-4">The Arsenal</p>
+          <p className="text-sm text-accent tracking-widest uppercase mb-4">What we do</p>
           <h2 className="font-heading text-display text-fg mb-6">
-            <SplitText>The 0-1 Traction Sprint</SplitText>
+            <SplitText>Your complete growth ecosystem</SplitText>
           </h2>
           <p className="text-muted text-lg md:text-xl">
             A hyper-focused 14-day intensive protocol to weaponize your brand and unlock your first batch of power users. Pure execution.
@@ -63,12 +63,10 @@ export default function Offer() {
           <div className="flex justify-center border-t border-border pt-10">
             <MagneticButton
               as="a"
-              href="https://calendly.com/tanmaybhardwaj4444/30min"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#contact"
               className="inline-flex items-center gap-3 bg-accent text-bg text-sm font-medium px-10 py-4 tracking-wide uppercase hover:bg-fg transition-colors duration-300"
             >
-              Initiate Sprint
+              Start Building
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

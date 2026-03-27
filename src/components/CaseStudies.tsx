@@ -46,6 +46,26 @@ const caseStudies = [
     gradient: "from-zinc-500/20 to-zinc-800/20",
     mockupPattern: "bg-[repeating-linear-gradient(45deg,#ffffff05,#ffffff05_10px,transparent_10px,transparent_20px)]",
   },
+  {
+    id: "turing",
+    client: "Turing Community",
+    industry: "Community / Education",
+    metric: "10k+ Active Members",
+    description: "Scaled their college community into a nationwide tech hub using viral engineering ambassador loops and gamified Discord events.",
+    image: "/images/turing.png",
+    gradient: "from-emerald-500/20 to-teal-500/20",
+    mockupPattern: "bg-[linear-gradient(90deg,#ffffff11_1px,transparent_1px),linear-gradient(#ffffff11_1px,transparent_1px)] [background-size:20px_20px]",
+  },
+  {
+    id: "ffc",
+    client: "Fun Friend Chicken",
+    industry: "F&B / Local Brand",
+    metric: "Fully Booked Launch",
+    description: "Designed a localized hyper-targeted social media blast combined with heavy influencer activations across Delhi NCR.",
+    image: "/images/ffc.png",
+    gradient: "from-yellow-500/20 to-orange-500/20",
+    mockupPattern: "bg-[repeating-linear-gradient(45deg,#ffffff05,#ffffff05_10px,transparent_10px,transparent_20px)]",
+  },
 ];
 
 export default function CaseStudies() {
@@ -76,7 +96,7 @@ export default function CaseStudies() {
       <div className="container-wide">
         {/* Section Header */}
         <div className="mb-20">
-          <p className="text-sm text-accent tracking-widest uppercase mb-4">Selected Work</p>
+          <p className="text-sm text-accent tracking-widest uppercase mb-4">Case Studies</p>
           <h2 className="font-heading text-display text-fg max-w-[800px]">
             <SplitText>Proof of Work</SplitText>
           </h2>

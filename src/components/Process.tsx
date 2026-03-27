@@ -35,9 +35,9 @@ export default function Process() {
     <section id="process" ref={sectionRef} className="section-padding py-section bg-bg">
       <div className="container-wide">
         <div className="text-center mb-20">
-          <p className="text-sm text-accent tracking-widest uppercase mb-4">The Protocol</p>
+          <p className="text-sm text-accent tracking-widest uppercase mb-4">How it works</p>
           <h2 className="font-heading text-display text-fg md:max-w-[700px] mx-auto">
-            <SplitText>Four steps to inject liquidity into your pipeline.</SplitText>
+            <SplitText>Four steps from idea to traction.</SplitText>
           </h2>
         </div>
 
