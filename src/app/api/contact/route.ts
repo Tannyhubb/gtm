@@ -3,13 +3,17 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, stage, bottleneck } = body;
+    const { 
+      name, email, companyName, url, userType, goals, 
+      bottleneck, problemDuration, urgency, budget, 
+      authority, serviceType, source, trigger 
+    } = body;
 
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     // Validation
-    if (!name || !stage || !bottleneck) {
+    if (!name || !email) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -27,11 +31,27 @@ export async function POST(req: Request) {
     const message = `
 🚨 *New Protocol Application* 🚨
 
-*System Name/URL:* ${name}
-*Phase:* ${stage}
+*PERSONAL INFO*
+*Name:* ${name}
+*Email:* ${email}
+*Company:* ${companyName || 'Not provided'}
+*URL:* ${url || 'Not provided'}
+*Type:* ${userType || 'Not provided'}
 
-*Primary Bottleneck:*
-${bottleneck}
+*GOALS & PROBLEMS*
+*Goals:* ${(goals || []).join(', ')}
+*Bottleneck:* ${bottleneck || 'Not provided'}
+*Duration:* ${problemDuration || 'Not provided'}
+
+*QUALIFICATION*
+*Urgency:* ${urgency || 'Not provided'}
+*Budget:* ${budget || 'Not provided'}
+*Authority:* ${authority || 'Not provided'}
+*Needs:* ${serviceType || 'Not provided'}
+
+*SOURCE*
+*Found via:* ${source || 'Not provided'}
+*Trigger:* ${trigger || 'Not provided'}
     `;
 
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

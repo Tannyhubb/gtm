@@ -1,27 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   
-  // Zero-lag immediate motion values
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
+  // Spring config for smooth movement
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.2 };
+  const cursorX = useSpring(-100, springConfig);
+  const cursorY = useSpring(-100, springConfig);
 
   useEffect(() => {
-    // We bind event listeners globally with { passive: true } for max performance
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
     };
 
-    // Lightweight event delegation instead of deep DOM traversal on every pixel
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       // Simple check for interactables
       const isInteractable = 
+        window.getComputedStyle(target).cursor === 'pointer' ||
         target.tagName === 'A' || 
         target.tagName === 'BUTTON' || 
         target.closest('a') !== null || 
@@ -41,22 +41,28 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* The Sleek Dynamic Cursor */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full mix-blend-difference bg-white flex items-center justify-center transition-all duration-200 ease-out"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full mix-blend-difference bg-white flex items-center justify-center"
+        animate={{
+          width: isHovered ? 80 : 20,
+          height: isHovered ? 80 : 20,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
         style={{
           x: cursorX,
           y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
-          width: isHovered ? 80 : 20,
-          height: isHovered ? 80 : 20,
         }}
       >
         {isHovered && (
-          <span className="text-black text-[10px] uppercase font-bold tracking-widest leading-none mix-blend-normal opacity-80">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.8 }}
+            className="text-black text-[10px] uppercase font-bold tracking-widest leading-none mix-blend-normal"
+          >
             Click
-          </span>
+          </motion.span>
         )}
       </motion.div>
     </>
