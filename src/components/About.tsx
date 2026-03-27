@@ -5,9 +5,9 @@ import { motion, useInView } from "framer-motion";
 import SplitText from "./SplitText";
 
 const stats = [
-  { value: "3x", label: "Avg Pipeline ROI" },
-  { value: "12+", label: "Startups Scaled" },
-  { value: "$5M+", label: "Pipeline Generated" },
+  { value: "2X", label: "Avg Pipeline ROI" },
+  { value: "8+", label: "Startups Scaled" },
+  { value: "Growing", label: "Early-Stage Pipeline" },
   { value: "100%", label: "Operator Led" },
 ];
 
