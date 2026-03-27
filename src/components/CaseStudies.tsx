@@ -22,7 +22,7 @@ const caseStudies = [
     industry: "Consumer Hardware",
     metric: "Child Safety Wearable",
     description: "Developed the go-to-market strategy for a revolutionary child safety and monitoring wearable.",
-    image: "/images/hearforme.png",
+    image: "/images/hearforme.jpeg",
     gradient: "from-zinc-500/20 to-zinc-800/20",
     mockupPattern: "bg-[linear-gradient(45deg,#ffffff11_25%,transparent_25%,transparent_75%,#ffffff11_75%,#ffffff11)] [background-size:20px_20px]",
   },
