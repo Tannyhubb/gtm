@@ -87,13 +87,9 @@ body {
   }
 }
 
-/* Premium CSS Scroll Snapping (Replaces Lenis) */
-html {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-}
-
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+/* Custom Cursor logic */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
 }

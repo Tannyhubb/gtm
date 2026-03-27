@@ -135,8 +135,8 @@ export default function Hero() {
         >
           {[
             { value: "0-1", label: "Scaling Phase" },
-            { value: "14", label: "Day Sprint" },
-            { value: "10x", label: "Traction Goal" },
+            { value: "8+", label: "Startups Scaled" },
+            { value: "2X", label: "Average ROI" },
             { value: "100%", label: "Operator Led" },
           ].map((stat) => (
             <motion.div 

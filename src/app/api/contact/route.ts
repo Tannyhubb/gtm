@@ -4,16 +4,14 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { 
-      name, email, companyName, url, userType, goals, 
-      bottleneck, problemDuration, urgency, budget, 
-      authority, serviceType, source, trigger 
+      name, contactInfo, building, stage, budget, timeline 
     } = body;
 
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     // Validation
-    if (!name || !email) {
+    if (!name || !contactInfo || !building) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -29,29 +27,19 @@ export async function POST(req: Request) {
     }
 
     const message = `
-🚨 *New Protocol Application* 🚨
+🚨 *New Founder Intake Application* 🚨
 
-*PERSONAL INFO*
+*FOUNDER INFO*
 *Name:* ${name}
-*Email:* ${email}
-*Company:* ${companyName || 'Not provided'}
-*URL:* ${url || 'Not provided'}
-*Type:* ${userType || 'Not provided'}
+*Contact:* ${contactInfo}
 
-*GOALS & PROBLEMS*
-*Goals:* ${(goals || []).join(', ')}
-*Bottleneck:* ${bottleneck || 'Not provided'}
-*Duration:* ${problemDuration || 'Not provided'}
+*THE BUILD*
+*Building:* ${building}
+*Stage:* ${stage || 'Not provided'}
 
-*QUALIFICATION*
-*Urgency:* ${urgency || 'Not provided'}
+*LOGISTICS*
 *Budget:* ${budget || 'Not provided'}
-*Authority:* ${authority || 'Not provided'}
-*Needs:* ${serviceType || 'Not provided'}
-
-*SOURCE*
-*Found via:* ${source || 'Not provided'}
-*Trigger:* ${trigger || 'Not provided'}
+*Timeline:* ${timeline || 'Not provided'}
     `;
 
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

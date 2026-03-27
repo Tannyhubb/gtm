@@ -4,39 +4,24 @@ import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowRight, ArrowLeft, CheckCircle2, ChevronDown, Check } from "lucide-react";
 import SplitText from "./SplitText";
+import MagneticButton from "./MagneticButton";
 
 type FormData = {
   name: string;
-  email: string;
-  companyName: string;
-  url: string;
-  userType: string;
-  goals: string[];
-  bottleneck: string;
-  problemDuration: string;
-  urgency: string;
+  contactInfo: string;
+  building: string;
+  stage: string;
   budget: string;
-  authority: string;
-  serviceType: string;
-  source: string;
-  trigger: string;
+  timeline: string;
 };
 
 const initialFormData: FormData = {
   name: "",
-  email: "",
-  companyName: "",
-  url: "",
-  userType: "",
-  goals: [],
-  bottleneck: "",
-  problemDuration: "",
-  urgency: "",
+  contactInfo: "",
+  building: "",
+  stage: "",
   budget: "",
-  authority: "",
-  serviceType: "",
-  source: "",
-  trigger: "",
+  timeline: "",
 };
 
 export default function Contact() {
@@ -44,14 +29,13 @@ export default function Contact() {
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const [step, setStep] = useState(1);
-  const totalSteps = 9;
+  const totalSteps = 4;
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "redirecting" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Load saved progress
   useEffect(() => {
-    const saved = localStorage.getItem("gtmContactDraft");
+    const saved = localStorage.getItem("gtmIntakeDraft");
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -60,9 +44,8 @@ export default function Contact() {
     }
   }, []);
 
-  // Save progress
   useEffect(() => {
-    localStorage.setItem("gtmContactDraft", JSON.stringify(formData));
+    localStorage.setItem("gtmIntakeDraft", JSON.stringify(formData));
   }, [formData]);
 
   const updateForm = (updates: Partial<FormData>) => {
@@ -70,37 +53,20 @@ export default function Contact() {
   };
 
   const handleNext = () => {
-    // Validation rules
-    if (step === 1 && (!formData.name || !formData.email)) {
-       setErrorMessage("Name and email are required.");
+    if (step === 1 && (!formData.name || !formData.contactInfo)) {
+       setErrorMessage("Name and contact info are required.");
        return;
     }
-    if (step === 2 && !formData.userType) {
-       setErrorMessage("Please select an option.");
+    if (step === 2 && !formData.building) {
+       setErrorMessage("Please tell us what you are building.");
        return;
     }
-    if (step === 3 && formData.goals.length === 0) {
-      setErrorMessage("Please select at least one goal.");
+    if (step === 3 && !formData.stage) {
+      setErrorMessage("Please select your current stage.");
       return;
     }
-    if (step === 4 && (!formData.bottleneck || !formData.problemDuration)) {
-      setErrorMessage("Please answer both questions.");
-      return;
-    }
-    if (step === 5 && !formData.urgency) {
-      setErrorMessage("Please select your urgency level.");
-      return;
-    }
-    if (step === 6 && !formData.budget) {
-      setErrorMessage("Please select your budget range.");
-      return;
-    }
-    if (step === 7 && !formData.authority) {
-      setErrorMessage("Please indicate if you are the decision maker.");
-      return;
-    }
-    if (step === 8 && !formData.serviceType) {
-      setErrorMessage("Please select what you are looking for.");
+    if (step === 4 && (!formData.budget || !formData.timeline)) {
+      setErrorMessage("Please select your budget and timeline.");
       return;
     }
     
@@ -115,8 +81,8 @@ export default function Contact() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.source) {
-      setErrorMessage("Please tell us where you heard about us.");
+    if (!formData.budget || !formData.timeline) {
+      setErrorMessage("Please complete all fields.");
       return;
     }
 
@@ -132,23 +98,8 @@ export default function Contact() {
 
       if (!res.ok) throw new Error("Failed to submit");
 
-      localStorage.removeItem("gtmContactDraft");
-
-      // Logic / Automations
-      const isHighQuality = 
-         (formData.budget === "$2,000–$10,000" || formData.budget === "$10,000+") && 
-         formData.urgency === "Urgent (this month)";
-
-      if (isHighQuality) {
-         setStatus("redirecting");
-         // For demo purposes, delay then you'd redirect
-         setTimeout(() => {
-            window.open("https://calendly.com/tanmaybhardwaj4444/30min", "_blank");
-            setStatus("success");
-         }, 1500);
-      } else {
-         setStatus("success");
-      }
+      localStorage.removeItem("gtmIntakeDraft");
+      setStatus("success");
       
     } catch (err) {
       console.error(err);
@@ -156,45 +107,28 @@ export default function Contact() {
     }
   };
 
-  // --- Step Rendering Helpers ---
-  const renderOptions = (
-    field: keyof FormData,
-    options: string[],
-    multiple = false,
-    maxSelect = 2
-  ) => {
+  const renderOptions = (field: keyof FormData, options: string[]) => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
         {options.map((opt) => {
-          const isSelected = multiple 
-            ? (formData[field] as string[]).includes(opt)
-            : formData[field] === opt;
+          const isSelected = formData[field] === opt;
             
           return (
             <button
               key={opt}
               type="button"
-              onClick={() => {
-                if (multiple) {
-                  let arr = [...(formData[field] as string[])];
-                  if (isSelected) arr = arr.filter((v) => v !== opt);
-                  else if (arr.length < maxSelect) arr.push(opt);
-                  updateForm({ [field]: arr } as any);
-                } else {
-                  updateForm({ [field]: opt } as any);
-                }
-              }}
-              className={`flex items-center justify-between p-4 border text-left transition-all duration-300 ${
+              onClick={() => updateForm({ [field]: opt } as any)}
+              className={`flex items-center justify-between p-5 border text-left transition-all duration-300 ${
                 isSelected 
-                  ? "border-accent bg-accent/5" 
-                  : "border-border/30 hover:border-border bg-border/5"
+                  ? "border-accent bg-accent/5 backdrop-blur-md shadow-[0_0_20px_rgba(232,160,69,0.1)]" 
+                  : "border-border/40 hover:border-border bg-bg/50 backdrop-blur-sm"
               }`}
             >
-              <span className={`text-sm ${isSelected ? "text-accent font-medium" : "text-fg"}`}>{opt}</span>
-              <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${
-                isSelected ? "border-accent bg-accent text-bg" : "border-border"
+              <span className={`text-sm tracking-wide ${isSelected ? "text-accent font-medium leading-none" : "text-fg leading-none"}`}>{opt}</span>
+              <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
+                isSelected ? "border-accent bg-accent text-bg" : "border-border/50"
               }`}>
-                {isSelected && <Check size={12} strokeWidth={3} />}
+                {isSelected && <Check size={10} strokeWidth={4} />}
               </div>
             </button>
           );
@@ -207,24 +141,24 @@ export default function Contact() {
     <section id="contact" ref={ref} className="section-padding py-section relative">
       <div className="container-max">
         <div className="mx-auto max-w-[800px]">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="font-heading text-4xl md:text-5xl text-fg mb-4">
-              <SplitText>Get Your Growth Plan</SplitText>
+              <SplitText>Founder Intake</SplitText>
             </h2>
             <p className="text-muted text-lg max-w-[500px] mx-auto">
-              We only work with a limited number of clients. Let&apos;s see if we&apos;re a fit.
+              We partner with serious founders ready to scale. Tell us about what you&apos;re building.
             </p>
           </div>
 
           <motion.div
-            className="bg-bg border border-border overflow-hidden relative"
+            className="bg-bg/40 backdrop-blur-xl border border-border/50 shadow-2xl relative"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
           >
             {/* Progress Bar */}
-            {status !== "success" && status !== "redirecting" && (
-              <div className="bg-border/30 h-1.5 w-full relative">
+            {status !== "success" && (
+              <div className="bg-border/20 h-1 w-full relative">
                 <motion.div 
                   className="absolute top-0 left-0 bottom-0 bg-accent"
                   initial={{ width: 0 }}
@@ -234,21 +168,15 @@ export default function Contact() {
               </div>
             )}
 
-            <div className="p-8 md:p-12 min-h-[500px] flex flex-col pt-12">
-              {status === "redirecting" ? (
-                 <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6">
-                    <div className="w-16 h-16 rounded-full border-t-2 border-accent animate-spin mb-2" />
-                    <h3 className="font-heading text-3xl text-fg">You qualify!</h3>
-                    <p className="text-muted">Redirecting you to our calendar to book a strategy call...</p>
-                 </div>
-              ) : status === "success" ? (
+            <div className="p-8 md:p-14 min-h-[450px] flex flex-col">
+              {status === "success" ? (
                 <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mb-2">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mb-2 border border-accent/20">
                     <CheckCircle2 size={32} className="text-accent" />
                   </div>
-                  <h3 className="font-heading text-3xl text-fg">Application Received.</h3>
+                  <h3 className="font-heading text-3xl text-fg">Application Received</h3>
                   <p className="text-muted max-w-[400px]">
-                    We&apos;ll send you a custom growth roadmap shortly after reviewing your details.
+                    We will review your submission and reach out via your preferred contact method shortly.
                   </p>
                   <button 
                     onClick={() => {
@@ -256,23 +184,23 @@ export default function Contact() {
                       setStep(1);
                       setFormData(initialFormData);
                     }}
-                    className="mt-8 text-sm text-accent uppercase tracking-widest hover:text-fg transition-colors inline-block"
+                    className="mt-8 text-xs text-muted uppercase tracking-widest hover:text-accent transition-colors py-2 border-b border-transparent hover:border-accent"
                   >
-                    Return Home
+                    Submit Another
                   </button>
                 </div>
               ) : (
                 <>
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center justify-between mb-10">
                     <span className="text-xs font-mono uppercase text-muted tracking-widest">
-                      Step {step} of {totalSteps}
+                      Step {step} // {totalSteps}
                     </span>
                     {step > 1 && (
                       <button 
                         onClick={handleBack}
-                        className="text-xs font-mono uppercase text-muted hover:text-fg transition-colors flex items-center gap-1"
+                        className="text-xs font-mono uppercase text-muted hover:text-fg transition-colors flex items-center gap-2 group"
                       >
-                        <ArrowLeft size={14} /> Back
+                        <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back
                       </button>
                     )}
                   </div>
@@ -281,54 +209,34 @@ export default function Contact() {
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={step}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        initial={{ opacity: 0, x: 10, filter: "blur(4px)" }}
+                        animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                        exit={{ opacity: 0, x: -10, filter: "blur(4px)" }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="space-y-6"
                       >
                         {step === 1 && (
-                          <div className="space-y-6">
-                            <h3 className="text-2xl font-heading text-fg mb-2">Basic Information</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                              <div className="space-y-2">
-                                <label className="text-sm text-fg">Full Name *</label>
+                          <div className="space-y-8">
+                            <h3 className="text-2xl font-heading text-fg mb-4">Founder Details</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                              <div className="space-y-3">
+                                <label className="text-sm text-fg/80 uppercase tracking-wide text-xs">Full Name</label>
                                 <input 
                                   type="text" 
                                   value={formData.name}
                                   onChange={(e) => updateForm({ name: e.target.value })}
-                                  className="w-full bg-border/5 border border-border/30 focus:border-accent focus:bg-border/10 text-fg px-4 py-3 outline-none transition-all"
+                                  className="w-full bg-transparent border-b border-border/40 focus:border-accent text-fg py-3 outline-none transition-all placeholder:text-muted/50"
                                   placeholder="John Doe"
                                 />
                               </div>
-                              <div className="space-y-2">
-                                <label className="text-sm text-fg">Work Email *</label>
-                                <input 
-                                  type="email" 
-                                  value={formData.email}
-                                  onChange={(e) => updateForm({ email: e.target.value })}
-                                  className="w-full bg-border/5 border border-border/30 focus:border-accent focus:bg-border/10 text-fg px-4 py-3 outline-none transition-all"
-                                  placeholder="john@company.com"
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <label className="text-sm text-fg">Company Name</label>
+                              <div className="space-y-3">
+                                <label className="text-sm text-fg/80 uppercase tracking-wide text-xs">Email or Phone</label>
                                 <input 
                                   type="text" 
-                                  value={formData.companyName}
-                                  onChange={(e) => updateForm({ companyName: e.target.value })}
-                                  className="w-full bg-border/5 border border-border/30 focus:border-accent focus:bg-border/10 text-fg px-4 py-3 outline-none transition-all"
-                                  placeholder="Company Inc."
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <label className="text-sm text-fg">Website / LinkedIn</label>
-                                <input 
-                                  type="url" 
-                                  value={formData.url}
-                                  onChange={(e) => updateForm({ url: e.target.value })}
-                                  className="w-full bg-border/5 border border-border/30 focus:border-accent focus:bg-border/10 text-fg px-4 py-3 outline-none transition-all"
-                                  placeholder="https://acme.com"
+                                  value={formData.contactInfo}
+                                  onChange={(e) => updateForm({ contactInfo: e.target.value })}
+                                  className="w-full bg-transparent border-b border-border/40 focus:border-accent text-fg py-3 outline-none transition-all placeholder:text-muted/50"
+                                  placeholder="john@founder.com"
                                 />
                               </div>
                             </div>
@@ -336,146 +244,49 @@ export default function Contact() {
                         )}
 
                         {step === 2 && (
-                          <div>
-                            <h3 className="text-2xl font-heading text-fg mb-2">Which best describes you?</h3>
-                            {renderOptions("userType", [
-                              "Founder",
-                              "Startup (0–10 employees)",
-                              "Growth-stage (10–100 employees)",
-                              "Enterprise",
-                              "Creator / Personal Brand"
-                            ])}
+                          <div className="space-y-8">
+                            <h3 className="text-2xl font-heading text-fg mb-2">What are you building?</h3>
+                            <p className="text-muted text-sm mb-4">Give us the raw, unfiltered truth of the problem you solve.</p>
+                            <textarea 
+                              rows={4}
+                              value={formData.building}
+                              onChange={(e) => updateForm({ building: e.target.value })}
+                              className="w-full bg-bg/50 border border-border/40 focus:border-accent text-fg p-5 outline-none transition-all resize-none shadow-inner"
+                              placeholder="We are building an AI-powered..."
+                            ></textarea>
                           </div>
                         )}
 
                         {step === 3 && (
                           <div>
-                            <h3 className="text-2xl font-heading text-fg mb-1">What are you trying to achieve?</h3>
-                            <p className="text-sm text-muted mb-4">(Select up to 2)</p>
-                            {renderOptions("goals", [
-                              "Get first customers",
-                              "Increase conversions",
-                              "Build brand / positioning",
-                              "Launch a new product",
-                              "Fix sales funnel",
-                              "Build GTM system",
-                              "Other"
-                            ], true, 2)}
+                            <h3 className="text-2xl font-heading text-fg mb-6">Current Stage</h3>
+                            {renderOptions("stage", [
+                              "Idea / Pre-Product",
+                              "MVP / Beta Testing",
+                              "Early Traction (Pre-Seed/Seed)",
+                              "Scaling (Series A+)"
+                            ])}
                           </div>
                         )}
 
                         {step === 4 && (
-                          <div className="space-y-8">
-                            <div className="space-y-3">
-                              <h3 className="text-2xl font-heading text-fg">What&apos;s your biggest bottleneck right now?</h3>
-                              <textarea 
-                                rows={3}
-                                value={formData.bottleneck}
-                                onChange={(e) => updateForm({ bottleneck: e.target.value })}
-                                className="w-full bg-border/5 border border-border/30 focus:border-accent focus:bg-border/10 text-fg p-4 outline-none transition-all resize-none"
-                                placeholder="E.g. We have a great product but struggling to get qualified leads consistently..."
-                              ></textarea>
-                            </div>
-                            
+                          <div className="space-y-10">
                             <div>
-                              <h4 className="text-lg font-heading text-fg mb-3">How long has this been a problem?</h4>
-                              <div className="flex flex-wrap gap-3">
-                                {["Just started", "1–3 months", "3–12 months", "1+ year"].map(opt => (
-                                  <button
-                                    key={opt}
-                                    onClick={() => updateForm({ problemDuration: opt })}
-                                    className={`px-5 py-2.5 border text-sm transition-colors ${
-                                      formData.problemDuration === opt 
-                                        ? "border-accent bg-accent/10 text-accent" 
-                                        : "border-border/40 text-fg hover:border-border"
-                                    }`}
-                                  >
-                                    {opt}
-                                  </button>
-                                ))}
-                              </div>
+                               <h3 className="text-2xl font-heading text-fg mb-6">Execution Timeline</h3>
+                               {renderOptions("timeline", [
+                                 "ASAP (Next 14 days)",
+                                 "This Quarter",
+                                 "Just exploring"
+                               ])}
                             </div>
-                          </div>
-                        )}
-
-                        {step === 5 && (
-                          <div>
-                            <h3 className="text-2xl font-heading text-fg mb-4">How urgent is solving this?</h3>
-                            {renderOptions("urgency", [
-                              "Just exploring",
-                              "Need a solution soon",
-                              "Urgent (this month)"
-                            ])}
-                          </div>
-                        )}
-
-                        {step === 6 && (
-                          <div>
-                            <h3 className="text-2xl font-heading text-fg mb-4">What&apos;s your budget to solve this?</h3>
-                            {renderOptions("budget", [
-                              "<$500",
-                              "$500–$2,000",
-                              "$2,000–$10,000",
-                              "$10,000+"
-                            ])}
-                          </div>
-                        )}
-
-                        {step === 7 && (
-                          <div>
-                            <h3 className="text-2xl font-heading text-fg mb-4">Are you the decision maker?</h3>
-                            {renderOptions("authority", [
-                              "Yes",
-                              "Partially involved",
-                              "No, just researching"
-                            ])}
-                          </div>
-                        )}
-
-                        {step === 8 && (
-                          <div>
-                            <h3 className="text-2xl font-heading text-fg mb-4">What type of help are you looking for?</h3>
-                            {renderOptions("serviceType", [
-                              "Done-for-you execution",
-                              "Strategy / consulting",
-                              "Systems / automation",
-                              "Not sure yet"
-                            ])}
-                          </div>
-                        )}
-
-                        {step === 9 && (
-                          <div className="space-y-6">
-                            <h3 className="text-2xl font-heading text-fg mb-4">Final details</h3>
-                            
-                            <div className="space-y-2">
-                              <label className="text-sm text-fg">Where did you hear about us?</label>
-                              <div className="relative">
-                                <select 
-                                  value={formData.source}
-                                  onChange={(e) => updateForm({ source: e.target.value })}
-                                  className="w-full bg-border/5 border border-border/30 focus:border-accent focus:bg-border/10 text-fg px-4 py-4 outline-none transition-all appearance-none"
-                                >
-                                  <option value="" disabled>Select an option...</option>
-                                  <option value="Twitter / X">Twitter / X</option>
-                                  <option value="LinkedIn">LinkedIn</option>
-                                  <option value="Google">Google</option>
-                                  <option value="Referral">Friend / Referral</option>
-                                  <option value="Other">Other</option>
-                                </select>
-                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none" size={16} />
-                              </div>
-                            </div>
-
-                            <div className="space-y-2">
-                              <label className="text-sm text-fg">What made you reach out today?</label>
-                              <input 
-                                type="text"
-                                value={formData.trigger}
-                                onChange={(e) => updateForm({ trigger: e.target.value })}
-                                className="w-full bg-border/5 border border-border/30 focus:border-accent focus:bg-border/10 text-fg px-4 py-3 outline-none transition-all"
-                                placeholder="I saw your post about X and..."
-                              />
+                            <div>
+                               <h3 className="text-2xl font-heading text-fg mb-6">Budget Range</h3>
+                               {renderOptions("budget", [
+                                 "Under $2,000",
+                                 "$2k - $5k",
+                                 "$5k - $10k",
+                                 "$10k+"
+                               ])}
                             </div>
                           </div>
                         )}
@@ -483,9 +294,9 @@ export default function Contact() {
                     </AnimatePresence>
                   </div>
 
-                  <div className="pt-8 mt-auto flex flex-col items-center">
+                  <div className="pt-12 mt-auto flex flex-col items-center border-t border-border/30 mt-8">
                     {errorMessage && (
-                      <p className="text-red-400 text-sm mb-4 bg-red-400/10 py-2 px-4 w-full text-center border border-red-400/20">
+                      <p className="text-red-400 text-sm mb-6 w-full text-center">
                         {errorMessage}
                       </p>
                     )}
@@ -494,14 +305,14 @@ export default function Contact() {
                       type="button"
                       disabled={status === "loading"}
                       onClick={step < totalSteps ? handleNext : handleSubmit}
-                      className="w-full bg-accent text-bg text-[13px] font-bold tracking-[0.15em] uppercase py-4 hover:bg-fg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2 group"
+                      className="w-full bg-accent text-bg text-[13px] font-bold tracking-[0.15em] uppercase py-5 hover:bg-fg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3 group"
                     >
                       {status === "loading" ? (
-                        "Transmitting..."
+                        <span className="flex items-center gap-2">Transmitting<span className="animate-pulse">...</span></span>
                       ) : step < totalSteps ? (
                         <>Continue <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></>
                       ) : (
-                        "Get My Growth Plan"
+                        "Get Started"
                       )}
                     </button>
                   </div>
@@ -514,4 +325,3 @@ export default function Contact() {
     </section>
   );
 }
-

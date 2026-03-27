@@ -6,24 +6,24 @@ import SplitText from "./SplitText";
 
 const testimonials = [
   {
-    quote: "We had a solid product but zero reliable pipeline. In 3 weeks, the sprint restructured our entire outbound motion. We hit a 300% increase in bookings and finally cracked our ICP. It's exactly the aggressive execution we needed.",
-    author: "Founder",
-    company: "Tripvexa",
+    quote: "Our product was solid, but the growth system they engineered completely transformed how we capture and retain users. Pure execution, no fluff.",
+    author: "Nirupam Sharma",
+    company: "Colado",
   },
   {
-    quote: "Most agencies waste time on abstract brand theory. This was pure, unadulterated performance. They overhauled our creative, fixed our Shopify funnels, and delivered a 4.5x ROAS in 30 days. No fluff, just revenue.",
-    author: "CMO",
-    company: "Verage Bags",
+    quote: "We needed a go-to-market strategy that actually connected with parents. The positioning and launch strategy they built was flawless.",
+    author: "Vaasu",
+    company: "HearForMe",
   },
   {
-    quote: "Scaling a college community into a nationwide tech hub is notoriously hard. The viral loops and ambassador frameworks they engineered for us took us past 10,000 active members faster than we thought possible.",
-    author: "Head of Community",
-    company: "Turing Community",
+    quote: "The onboarding experience and churn-reduction system they designed fundamentally shifted our revenue metrics. High-leverage work.",
+    author: "Anamika",
+    company: "Synora",
   },
   {
-    quote: "Launching a local F&B brand in Delhi NCR is brutal. Their hyper-targeted influencer activations and social blast strategy meant we were fully booked from day one. They think like operators, not just marketers.",
-    author: "Owner",
-    company: "Fun Friend Chicken",
+    quote: "They didn't just market a game; they built an entire engaged community of early adopters before we even launched. Incredible ROI.",
+    author: "Harshit Khemani",
+    company: "Smash & Clash",
   },
 ];
 
