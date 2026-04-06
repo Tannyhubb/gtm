@@ -34,13 +34,40 @@ const instrumentSerif = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "buildyour.company",
+  metadataBase: new URL('https://buildyour.company'),
+  title: "BuildYour.Company — Growth Engineering for Startups | Build Revenue Systems",
   description:
-    "We architect go-to-market strategies that turn ambitious products into market leaders. Strategy, positioning, demand generation, and revenue operations.",
+    "BuildYour.Company is a growth engineering firm helping startups go from 0 to traction. We build outbound systems, optimize conversions, and create scalable revenue engines for founders.",
+  keywords: [
+    "growth engineering",
+    "startup growth agency",
+    "GTM strategy",
+    "startup marketing",
+    "revenue growth",
+    "outbound systems",
+    "conversion optimization",
+    "growth strategy",
+    "buildyour.company"
+  ],
+  authors: [{ name: "BuildYour.Company" }],
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "buildyour.company",
+    title: "BuildYour.Company — Growth Engineering for Startups",
     description:
-      "We architect go-to-market strategies that turn ambitious products into market leaders.",
+      "We build revenue engines for founders. Stop guessing. Start scaling with systems that actually convert.",
+    url: "/",
+    siteName: "BuildYour.Company",
+    images: [
+      {
+        url: "/og-image.png",
+      },
+    ],
     type: "website",
   },
   icons: {
