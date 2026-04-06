@@ -41,10 +41,10 @@ export default function About() {
                 Founders don&apos;t need more advice. They need execution.
               </p>
               <p className="text-muted leading-relaxed">
-                When you partner with me, I don&apos;t act like a traditional agency. I embed directly into your startup. I find the exact bottlenecks starving your revenue, and I build the actual outbound systems required to scale your product to its next 10,000 users.
+                When you partner with me, I don&apos;t act like a traditional agency. I embed directly into your startup. I find the exact bottlenecks starving your revenue, and I build the actual scalable revenue engines and outbound systems required to scale your product to its next 10,000 users.
               </p>
               <p className="text-muted leading-relaxed">
-                If you are looking for generic ads or corporate consulting decks, I am not your guy. But if you want a growth operator who acts like a co-founder and is obsessed with your pipeline, let&apos;s talk.
+                If you are looking for generic ads or corporate consulting decks, I am not your guy. But if you want a growth operator who acts like a co-founder and is obsessed with your pipeline and revenue engines, let&apos;s talk.
               </p>
               <div className="pt-6 mt-6 border-t border-border/30">
                 <p className="text-fg font-heading text-2xl">— Tanmay Bhardwaj</p>

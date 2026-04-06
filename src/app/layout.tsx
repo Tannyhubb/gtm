@@ -35,9 +35,9 @@ const instrumentSerif = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://buildyour.company'),
-  title: "BuildYour.Company — Growth Engineering for Startups | Build Revenue Systems",
+  title: "Growth Engineering for Startups | Build Revenue Systems",
   description:
-    "BuildYour.Company is a growth engineering firm helping startups go from 0 to traction. We build outbound systems, optimize conversions, and create scalable revenue engines for founders.",
+    "Growth engineering firm helping startups go from 0 to traction. We build outbound systems and scalable revenue engines for founders.",
   keywords: [
     "growth engineering",
     "startup growth agency",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "BuildYour.Company — Growth Engineering for Startups",
+    title: "Growth Engineering for Startups",
     description:
       "We build revenue engines for founders. Stop guessing. Start scaling with systems that actually convert.",
     url: "/",
@@ -72,6 +72,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
 

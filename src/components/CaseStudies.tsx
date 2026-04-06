@@ -136,7 +136,7 @@ export default function CaseStudies() {
 
                       
                       {/* Name fades out when hovering over the image */}
-                      <h4 className="font-heading text-3xl text-fg/80 z-10 font-bold group-hover:opacity-0 transition-opacity duration-500 drop-shadow-2xl">{cs.client}</h4>
+                      <p className="font-heading text-3xl text-fg/80 z-10 font-bold group-hover:opacity-0 transition-opacity duration-500 drop-shadow-2xl">{cs.client}</p>
                     </motion.div>
 
                     <div className="flex items-center justify-between mb-4">
@@ -211,7 +211,7 @@ export default function CaseStudies() {
                   {/* Bottom Vignette for text legibility */}
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0A] to-transparent z-10 pointer-events-none"></div>
 
-                  <h4 className="font-heading text-5xl md:text-7xl text-fg/80 z-20 font-bold mb-4 drop-shadow-2xl">{activeCaseData.client}</h4>
+                  <p className="font-heading text-5xl md:text-7xl text-fg/80 z-20 font-bold mb-4 drop-shadow-2xl block">{activeCaseData.client}</p>
                 </motion.div>
 
                 {/* Modal Content */}
@@ -229,11 +229,11 @@ export default function CaseStudies() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                      <div>
-                        <h4 className="text-fg mb-3 font-medium">The Challenge</h4>
+                        <p className="text-fg mb-3 font-medium text-lg">The Challenge</p>
                         <p className="text-muted leading-relaxed mb-6">Before we engaged, the client was burning capital on generic brand awareness. They lacked a systemic acquisition funnel tailored to their precise ideal customer profile.</p>
                      </div>
                      <div>
-                        <h4 className="text-fg mb-3 font-medium">The Execution</h4>
+                        <p className="text-fg mb-3 font-medium text-lg">The Execution</p>
                         <p className="text-muted leading-relaxed">We stripped the frontend complexity, mapped out a singular high-leverage entry point, and executed the campaign. {activeCaseData.description}</p>
                      </div>
                   </div>
